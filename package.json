@@ -1,0 +1,36 @@
+{
+  "name": "ankh-tools",
+  "version": "1.0.0",
+  "description": "Ankhorage Dev & PM tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artiphishle/ankh-tools.git"
+  },
+  "keywords": [
+    "ts",
+    "typescript",
+    "pm",
+    "dev",
+    "tool",
+    "tools",
+    "node.js",
+    "plantuml",
+    "uml",
+    "sequence",
+    "diagram"
+  ],
+  "author": "Artiphishle <fabio.gartenmann@protonmail.com> (https://ankhorage.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artiphishle/ankh-tools/issues"
+  },
+  "homepage": "https://github.com/artiphishle/ankh-tools#readme",
+  "dependencies": {
+    "plantuml-parser": "^0.4.0",
+    "typescript": "^5.3.3"
+  }
+}

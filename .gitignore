@@ -1,0 +1,8 @@
+# NPM
+node_modules
+
+# VIM
+.swp
+
+# Apple
+.DS_Store
