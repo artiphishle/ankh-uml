@@ -1,0 +1,11 @@
+@startuml UML
+class User
+{
+  -id
+  -email
+  -username
+  -website
+  +getUser()
+  -verifyEmail()
+}
+@enduml

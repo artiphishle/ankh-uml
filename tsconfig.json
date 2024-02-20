@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "declaration": false,
+    "emitDecoratorMetadata": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "removeComments": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "target": "es2020",
+    "typeRoots": ["node_modules/@types", "src/types"]
+  },
+  "include": ["src/**/*"]
+}

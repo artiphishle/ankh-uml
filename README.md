@@ -1,21 +1,75 @@
-# Ankhorage Tools
+# ankh-tools-uml
 
-Ankhorage is the entrypoint of multiple tools that help plan, implement, test & document IT projects. Focus now on TypeScript, Node.js, React.js, React Native & Next.js
+Ankhorage is the entrypoint of multiple tools that help plan, implement, test & document IT projects.
 
 ## Quickstart
 
 As all the tools share the same entrypoint, you can start the CLI like this:
 
 ```bash
-npx ankhorage
+npx ankh-tools-uml
 ```
 
 ## Tools
 
-### UML Generator
+The following tools are implemented in this repository:
 
-Content to follow.
+### ankh-tools-uml
 
-### Sequence Diagram Generator
+Generate UML diagrams for your TypeScript classes.
 
-Content to follow.
+This allows inspection of parts of your whole architecture. Furthermore you can enable/disable features like:
+
+- [x] Start from a root file (entrypoint)
+- [ ] Show/hide interfaces
+- [ ] Show/hide types
+- [ ] Show/hide return values
+- [ ] Show/hide parameters
+- [ ] Show/hide dependencies
+- [ ] Set the depth of the diagram
+- [ ] Choose between multiple renderers
+  - [ ] Mermaid
+  - [x] PlantUML
+
+## Contributing
+
+At the moment the tools are written for Node.js & TypeScript.
+
+However other languages, platforms & tools are welcome.
+
+### Attach your tool
+
+If you have a tool that you want to attach to Ankhorage, you can do so by providing a NPX entrypoint.
+
+### Enhance this repository
+
+If you want to enhance this repository, you can do so by providing a PR.
+
+#### Conventions
+
+| Convention | Details                  |
+| ---------- | ------------------------ |
+| eslint     | `eslint-google-config`   |
+| prettier   | `artiphishle/prettierrc` |
+
+#### Conventions
+
+Entrypoint:
+
+- Naming: `ankh-tools-<toolname>`.
+- Callable via: `npx ankh-tools-<toolname>`.
+- Styling of stdout style as in `npx ankhorage`.
+
+## Changelog
+
+### 2024/02/20
+
+- Created a standalone package for ankh-tools-uml
+- Add `examples/` directory with a UML example
+
+### 2024/02/19
+
+#### Added UML Generator
+
+- Basic support of UML generation for a single TS Class
+- Generating UML using PlantUML (Mermaid planned).

@@ -1,36 +1,50 @@
 {
-  "name": "ankh-tools",
-  "version": "1.0.0",
-  "description": "Ankhorage Dev & PM tools",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/artiphishle/ankh-tools.git"
-  },
-  "keywords": [
-    "ts",
-    "typescript",
-    "pm",
-    "dev",
-    "tool",
-    "tools",
-    "node.js",
-    "plantuml",
-    "uml",
-    "sequence",
-    "diagram"
-  ],
   "author": "Artiphishle <fabio.gartenmann@protonmail.com> (https://ankhorage.com/)",
-  "license": "MIT",
+  "bin": {
+    "ankh-tools-uml": "npm start"
+  },
   "bugs": {
     "url": "https://github.com/artiphishle/ankh-tools/issues"
   },
   "homepage": "https://github.com/artiphishle/ankh-tools#readme",
+  "name": "ankh-tools",
+  "description": "Ankhorage Dev & PM tools",
+  "main": "dist/tools/uml/cli.js",
+  "keywords": [
+    "diagram",
+    "mermaid",
+    "plantuml",
+    "uml"
+  ],
   "dependencies": {
+    "lodash": "^4.17.21",
     "plantuml-parser": "^0.4.0",
-    "typescript": "^5.3.3"
-  }
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.11.19",
+    "@types/yargs": "^17.0.32",
+    "prettier": "^3.2.5",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artiphishle/ankh-tools.git"
+  },
+  "scripts": {
+    "build": "webpack --mode=development --config webpack.config.js",
+    "eslint:fix": "npx eslint -c .eslintrc --fix .",
+    "format": "npm run eslint:fix && npm run prettier:write",
+    "prettier:write": "npx prettier --write .",
+    "start": "npm run build && node dist/bundle.js"
+  },
+  "version": "1.0.0"
 }
