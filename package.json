@@ -1,7 +1,7 @@
 {
   "author": "Artiphishle <fabio.gartenmann@protonmail.com> (https://ankhorage.com/)",
   "bin": {
-    "ankh-tools-uml": "npm run start"
+    "ankh-tools-uml": "index.js"
   },
   "bugs": {
     "url": "https://github.com/artiphishle/ankh-tools-uml/issues"
@@ -46,5 +46,5 @@
     "prettier:write": "npx prettier --write .",
     "start": "npm run build && node dist/bundle.js"
   },
-  "version": "1.0.4"
+  "version": "1.0.5"
 }
