@@ -1,20 +1,14 @@
-# ankh-tools-uml
+# ankh-uml
 
 Ankhorage is the entrypoint of multiple tools that help plan, implement, test & document IT projects.
 
 ## Quickstart
 
-As all the tools share the same entrypoint, you can start the CLI like this:
-
 ```bash
-npx ankh-tools-uml
+npx ankh-uml
 ```
 
-## Tools
-
-The following tools are implemented in this repository:
-
-### ankh-tools-uml
+## Features
 
 Generate UML diagrams for your TypeScript classes.
 
@@ -56,8 +50,8 @@ If you want to enhance this repository, you can do so by providing a PR.
 
 Entrypoint:
 
-- Naming: `ankh-tools-<toolname>`.
-- Callable via: `npx ankh-tools-<toolname>`.
+- Naming: `ankh-<toolname>`.
+- Callable via: `npx ankh-<toolname>`.
 - Styling of stdout style as in `npx ankhorage`.
 
 ## Changelog

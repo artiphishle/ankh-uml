@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const path = require('path');
 const { spawn } = require('child_process');
-const scriptPath = path.join(__dirname, 'scripts', 'ankh-tools-uml.sh');
+const scriptPath = path.join(__dirname, 'scripts', 'ankh-uml.sh');
 const child = spawn(scriptPath, [], { stdio: 'inherit' });
 
 child.on('exit', (code, signal) => {
