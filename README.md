@@ -62,6 +62,10 @@ Entrypoint:
 
 ## Changelog
 
+### 2024/02/23
+
+- Repo renaming and move to meta repository
+
 ### 2024/02/20
 
 - Created a standalone package for ankh-tools-uml

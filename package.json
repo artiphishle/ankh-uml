@@ -1,13 +1,13 @@
 {
   "author": "Artiphishle <fabio.gartenmann@protonmail.com> (https://ankhorage.com/)",
   "bin": {
-    "ankh-tools-uml": "index.js"
+    "ankh-uml": "index.js"
   },
   "bugs": {
-    "url": "https://github.com/artiphishle/ankh-tools-uml/issues"
+    "url": "https://github.com/artiphishle/ankh-uml/issues"
   },
-  "homepage": "https://github.com/artiphishle/ankh-tools-uml#readme",
-  "name": "ankh-tools-uml",
+  "homepage": "https://github.com/artiphishle/ankh-uml#readme",
+  "name": "ankh-uml",
   "description": "Ankhorage UML generator",
   "main": "dist/bundle.js",
   "keywords": [
@@ -37,7 +37,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/artiphishle/ankh-tools-uml.git"
+    "url": "git+https://github.com/artiphishle/ankh-uml.git"
   },
   "scripts": {
     "build": "webpack --mode=development --config webpack.config.js",
@@ -46,5 +46,5 @@
     "prettier:write": "npx prettier --write .",
     "start": "npm run build && node dist/bundle.js"
   },
-  "version": "1.0.5"
+  "version": "1.0.6"
 }
