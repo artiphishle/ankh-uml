@@ -1,5 +1,5 @@
 import {GluegunCommand} from 'gluegun';
-import {AnkhUml} from 'src/tool/uml/Uml';
+import {AnkhUml} from '../../tool/uml/Uml';
 import {ERenderer} from 'src/types/types';
 
 const command: GluegunCommand = {
