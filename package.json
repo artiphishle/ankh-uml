@@ -1,7 +1,7 @@
 {
   "author": "Artiphishle <fabio.gartenmann@protonmail.com> (https://ankhorage.com/)",
   "bin": {
-    "ankh-uml": "bin/ankh-uml"
+    "ankh-uml": "bin/uml"
   },
   "bugs": {
     "url": "https://github.com/artiphishle/ankh-uml/issues"
@@ -17,6 +17,7 @@
     "uml"
   ],
   "dependencies": {
+    "gluegun": "^5.1.6",
     "lodash": "^4.17.21",
     "plantuml-parser": "^0.4.0",
     "ts-node": "^10.9.2",
@@ -46,5 +47,5 @@
     "prettier:write": "npx prettier --write .",
     "start": "npm run build && node dist/bundle.js"
   },
-  "version": "1.0.7"
+  "version": "1.0.13"
 }
