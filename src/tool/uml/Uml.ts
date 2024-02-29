@@ -154,3 +154,7 @@ export class AnkhUml {
     return this;
   }
 }
+const [rootFile] = process.argv.slice(2);
+new AnkhUml()
+  .parse({rootFile})
+  .render({renderer: ERenderer.PlantUml, outDir: '.'});

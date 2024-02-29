@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: './src/cli/cli',
+  entry: './src/tool/uml/Uml',
   target: 'node',
   externals: [nodeExternals()],
   externalsPresets: {node: true},
