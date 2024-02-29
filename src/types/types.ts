@@ -22,6 +22,20 @@ interface AllOptions {
   readonly rootFile: string;
 }
 
+export interface IMethod {
+  readonly name: string;
+  readonly private: boolean;
+}
+export interface IProperty {
+  readonly name: string;
+}
+export interface IModule {
+  readonly class: string;
+  readonly methods: IMethod[];
+  readonly properties: IProperty[];
+  readonly instantiated?: string[];
+}
+
 export type Options = Partial<AllOptions>;
 export type ParseOptions = Pick<AllOptions, 'rootFile'>;
 export type RenderOptions = Pick<AllOptions, 'renderer' | 'outDir'>;
