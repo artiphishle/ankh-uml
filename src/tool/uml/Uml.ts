@@ -69,6 +69,7 @@ export class AnkhUml {
   constructor() {}
 
   parse({rootFile}: ParseOptions) {
+    if (!rootFile) throw new Error('rootFile is required');
     if (rootFile.split('.').length === 1) {
       // Quick preview of relations
       this.modules.push({

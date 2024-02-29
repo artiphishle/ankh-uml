@@ -1,19 +1,16 @@
 import {GluegunCommand} from 'gluegun';
-import {AnkhUml} from '../../tool/uml/Uml';
-import {ERenderer} from 'src/types/types';
+import {AnkhUml} from 'src/tool/uml/Uml';
 
-const command: GluegunCommand = {
+export const command: GluegunCommand = {
   name: 'uml',
   run: async (toolbox) => {
     const {parameters, print} = toolbox;
+    const {renderer, rootFile, outDir} = parameters.options;
 
     print.info('ankh-uml --rootFile={path/to/class.ts}');
     print.info(parameters.options);
 
-    new AnkhUml()
-      .parse({rootFile: parameters.options.rootFile})
-      .render({renderer: ERenderer.PlantUml, outDir: './'});
+    console.log('rootFile', rootFile);
+    new AnkhUml().parse({rootFile}).render({renderer, outDir});
   },
 };
-
-module.exports = command;
