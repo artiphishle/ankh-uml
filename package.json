@@ -6,6 +6,12 @@
   "bugs": {
     "url": "https://github.com/artiphishle/ankh-uml/issues"
   },
+  "engine": {
+    "node": "^20.11.0",
+    "yarn": "^1.22.21",
+    "npm": "please-use-yarn",
+    "pnpm": "please-use-yarn"
+  },
   "homepage": "https://github.com/artiphishle/ankh-uml#readme",
   "name": "ankh-uml",
   "description": "Ankhorage UML generator",
