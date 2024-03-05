@@ -1,0 +1,7 @@
+@startuml ankh-uml
+title Example: UML Colors
+abstract   Absztrakkt
+annotation Redwan #pink;line:red;line.bold;text:red
+class      Greentom      #palegreen;line:green;line.dashed;text:green
+interface  IDiisFace #aliceblue;line:blue;line.dotted;text:blue
+@enduml

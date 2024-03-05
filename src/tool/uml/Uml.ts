@@ -25,6 +25,9 @@ const Ast = {
       (node) => isMethodDeclaration(node) && node
     ) as MethodDeclaration[],
 
+  getMethod: (nodeArray: NodeArray<ClassElement>) =>
+    nodeArray.find(isMethodDeclaration),
+
   getConstructor: (nodeArray: NodeArray<ClassElement>) =>
     nodeArray.find(isConstructorDeclaration),
 
@@ -42,14 +45,27 @@ const Ast = {
   getMethodJson: (methods: MethodDeclaration[]) =>
     methods.map((node) => ({
       name: node.name?.getText(),
-      private: node.modifiers.some(
+      private: node.modifiers?.some(
         (modifier) => modifier.kind === SyntaxKind.PrivateKeyword
       ),
     })),
 
+  recursiveSearch: ({search = 'NewExpression', node}) => {
+    const parent = SyntaxKind[node.kind];
+
+    forEachChild(node, (child) => {
+      const kind = SyntaxKind[child.kind];
+      if (kind !== search) return Ast.recursiveSearch({search, node: child});
+      return forEachChild(child, (c) => c?.getText());
+    });
+    return undefined;
+  },
+
   getInstantiatedClasses: (block: Block, result = []) => {
+    console.log('1 block', SyntaxKind[block.kind]);
     forEachChild(block, (body) => {
       body.forEachChild((child) => {
+        console.log('2 ....', SyntaxKind[child.kind]);
         if (SyntaxKind[child.kind] !== 'BinaryExpression') return result;
         forEachChild(child, (token) => {
           forEachChild(token, (t) => {
@@ -70,7 +86,7 @@ export class AnkhUml {
 
   parse({rootFile}: ParseOptions) {
     if (!rootFile) throw new Error('rootFile is required');
-    if (rootFile.split('.').length === 1) {
+    if (!rootFile.endsWith('.ts')) {
       // Quick preview of relations
       this.modules.push({
         class: rootFile,
@@ -87,9 +103,15 @@ export class AnkhUml {
 
       const methods = Ast.getMethods(node.members);
       const properties = Ast.getProperties(node.members);
-      const constructor = Ast.getConstructor(node.members);
+      // const constructor = Ast.getConstructor(node.members);
       // const params = Ast.getConstructorParams(constructor?.parameters);
-      const instantiated = Ast.getInstantiatedClasses(constructor?.body);
+      // const instantiated = Ast.getInstantiatedClasses(constructor?.body);
+      /*const instantiated = Ast.getInstantiatedClasses(
+        Ast.getMethod(node.members).body
+      );*/
+
+      const instantiated =
+        methods.map((method) => Ast.recursiveSearch({node: method})) || [];
 
       const module: IModule = {
         instantiated,
@@ -155,6 +177,7 @@ export class AnkhUml {
   }
 }
 const [rootFile] = process.argv.slice(2);
+console.log('rootFile: ', rootFile);
 new AnkhUml()
   .parse({rootFile})
   .render({renderer: ERenderer.PlantUml, outDir: '.'});

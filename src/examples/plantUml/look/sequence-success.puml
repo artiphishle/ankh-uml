@@ -1,0 +1,7 @@
+@startuml ankh-uml
+!theme spacelab
+B -> A :  test
+B <- A :  $success("success: pass")
+B -x A :  $failure("failure")
+B ->> A : $warning("warning")
+@enduml

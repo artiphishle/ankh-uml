@@ -1,0 +1,12 @@
+@startuml ankh-uml
+
+title Sequence Diagram
+
+skinparam Shadowing true
+
+A -> B: A asks B about something
+B -> C: B doesn't know and aks C
+C -> B: C tells B after googling
+B -> A: B finally responds to A
+
+@enduml

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-npm start;
-exit 0;
+npm start $1 $2
+exit 0
