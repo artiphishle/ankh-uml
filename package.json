@@ -7,10 +7,10 @@
     "url": "https://github.com/artiphishle/ankh-uml/issues"
   },
   "engine": {
-    "node": "^20.11.0",
-    "yarn": "^1.22.21",
+    "node": "^20.11.1",
+    "yarn": "please-use-pnpm",
     "npm": "please-use-yarn",
-    "pnpm": "please-use-yarn"
+    "pnpm": "^8.15.6"
   },
   "homepage": "https://github.com/artiphishle/ankh-uml#readme",
   "name": "ankh-uml",
@@ -28,16 +28,16 @@
     "plantuml-parser": "^0.4.0",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.4",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.202",
-    "@types/node": "^20.11.19",
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^20.12.5",
     "@types/yargs": "^17.0.32",
     "prettier": "^3.2.5",
     "ts-loader": "^9.5.1",
-    "webpack": "^5.90.3",
+    "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-node-externals": "^3.0.0"
   },
@@ -49,10 +49,10 @@
   "scripts": {
     "build": "webpack --mode=development --config webpack.config.js",
     "eslint:fix": "npx eslint -c .eslintrc --fix .",
-    "format": "npm run eslint:fix && npm run prettier:write",
+    "format": "pnpm run eslint:fix && pnpm run prettier:write",
     "graph:git": "tsc src/tool/git/graph.ts && node src/tool/git/graph.js",
     "prettier:write": "npx prettier --write .",
-    "start": "npm run build && node dist/bundle.js"
+    "start": "pnpm run build && node dist/bundle.js"
   },
   "version": "1.1.6"
 }

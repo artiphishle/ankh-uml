@@ -82,11 +82,9 @@ const Ast = {
 export class AnkhUml {
   private modules: IModule[] = [];
 
-  constructor() {}
-
   parse({rootFile}: ParseOptions) {
-    if (!rootFile) throw new Error('rootFile is required');
-    if (!rootFile.endsWith('.ts')) {
+    console.log('[UML::parse]', 'rootFile:', rootFile);
+    if (!rootFile?.endsWith('.ts')) {
       // Quick preview of relations
       this.modules.push({
         class: rootFile,
@@ -177,7 +175,8 @@ export class AnkhUml {
   }
 }
 const [rootFile] = process.argv.slice(2);
-console.log('rootFile: ', rootFile);
+console.log('[UML]', 'rootFile:', rootFile);
+
 new AnkhUml()
-  .parse({rootFile})
+  .parse({rootFile: rootFile})
   .render({renderer: ERenderer.PlantUml, outDir: '.'});
