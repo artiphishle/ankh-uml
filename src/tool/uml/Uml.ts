@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {resolve, dirname, basename} from "path";
+=======
+import path from "path";
+>>>>>>> 3406914ba78df81748e38ee01da20e35ea165948
 import {readSync, writeSync} from 'src/util/fs.util';
 import {EErrRenderer} from 'src/types/error.constants';
 import {ERenderer, IModule, ParseOptions, RenderOptions} from 'src/types/types';
@@ -10,7 +14,10 @@ import {
   isClassDeclaration,
   isConstructorDeclaration,
   isImportDeclaration,
+<<<<<<< HEAD
   isTypeAliasDeclaration,
+=======
+>>>>>>> 3406914ba78df81748e38ee01da20e35ea165948
   isMethodDeclaration,
   isPropertyDeclaration,
   isNamespaceImport,
@@ -46,6 +53,7 @@ const Ast = {
       const importClause = node.importClause;
       const moduleSpecifier = node.moduleSpecifier.getText(sourceFile);
       const namedBindings = importClause?.namedBindings;
+<<<<<<< HEAD
           if(!namedBindings || isNamespaceImport(namedBindings) || isTypeAliasDeclaration(namedBindings)) return;
 
           namedBindings.elements.forEach((element) => {
@@ -58,6 +66,14 @@ const Ast = {
     
 
     importModules.push({name: namedImport, path: moduleSpecifier.slice(1,-1)});
+=======
+          if(!namedBindings || isNamespaceImport(namedBindings)) return;
+
+          namedBindings.elements.forEach((element) => {
+    const namedImport = element.name.getText(sourceFile);
+
+    importModules.push({name: namedImport, path: moduleSpecifier});
+>>>>>>> 3406914ba78df81748e38ee01da20e35ea165948
     });
     
     });
@@ -117,10 +133,17 @@ export class AnkhUml {
   private rootPath: string = "";
 
   parse({rootFile}: ParseOptions) {
+<<<<<<< HEAD
     console.log('\n/////\n\n[UML::parse]', 'rootFile:', basename(rootFile));
     
     if(!this.rootPath){
       this.rootPath = dirname(rootFile);
+=======
+    console.log('\n/////\n\n[UML::parse]', 'rootFile:', path.basename(rootFile));
+    
+    if(!this.rootPath){
+      this.rootPath = path.dirname(rootFile);
+>>>>>>> 3406914ba78df81748e38ee01da20e35ea165948
       console.log("[UML::parse]","rootPath:", this.rootPath);
     }
     
@@ -137,7 +160,11 @@ export class AnkhUml {
     const ast = createSourceFile(rootFile, content, ScriptTarget.ES2020, true);
 
     const imp = Ast.getImports(ast);
+<<<<<<< HEAD
     imp.forEach(({path})=> this.parse({rootFile: resolve(this.rootPath, `${path}.ts`)}))
+=======
+    imp.forEach(({name})=> this.parse({rootFile: path.resolve(this.rootPath, `${name}.ts`)}))
+>>>>>>> 3406914ba78df81748e38ee01da20e35ea165948
       
     forEachChild(ast, (n: Node) => {
       if (!isClassDeclaration(n)) return;
