@@ -5,8 +5,10 @@ Ankhorage is the entrypoint of multiple tools that help plan, implement, test & 
 ## Quickstart
 
 ```bash
-npx ankh-uml
+npx ankh-uml path/to/RootClass.ts .
 ```
+
+![UML Base Subclass](./uml-base-subclass.jpg)
 
 ## Features
 
