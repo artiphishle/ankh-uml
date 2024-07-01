@@ -1,4 +1,5 @@
-import {IdManager, type UniqueIdentifier} from './IdManager';
+
+import {IdManager} from './IdManager';
 import {WebsiteVerifier} from './WebsiteVerifier';
 
 interface IUser {
@@ -8,7 +9,7 @@ interface IUser {
   website: string;
 }
 
-class User {
+export class User {
   private id: string;
   private email: string;
   private username: string;

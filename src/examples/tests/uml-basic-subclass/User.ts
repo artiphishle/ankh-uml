@@ -1,17 +1,20 @@
 import {IdManager} from './IdManager';
 import {WebsiteVerifier} from './WebsiteVerifier';
+import {Address,type IAddress  } from './Address';
 
 interface IUser {
   id?: string;
+  address: IAddress;
   username: string;
   email: string;
   website: string;
 }
 
-class User {
+export class User {
   private id: string;
   private email: string;
   private username: string;
+  private address: IAddress;
   private website: string;
   private websiteVerifier: WebsiteVerifier;
 
@@ -19,6 +22,10 @@ class User {
     this.websiteVerifier = new WebsiteVerifier();
     this.id = IdManager.generateId();
     this.username = username;
+    this.address = new Address({
+      address: "Mainstreet 1",
+      zip: "8000"
+    }).getAddress();
 
     if (!this.verifyEmail(email)) throw new Error('Invalid eMail');
     this.email = email;
