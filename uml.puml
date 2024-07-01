@@ -12,11 +12,24 @@ class WebsiteVerifier
   +verify()
 }
 
+class AddressService
+{
+  -zipCityMap
+  +getCityByZip()
+}
+
+class Address
+{
+  -address
+  +getAddress()
+}
+
 class User
 {
   -id
   -email
   -username
+  -address
   -website
   -websiteVerifier
   +getUser()
@@ -24,7 +37,9 @@ class User
 }
 
 
+Address --> AddressService
 User --> IdManager
 User --> WebsiteVerifier
+User --> Address
 
 @enduml
