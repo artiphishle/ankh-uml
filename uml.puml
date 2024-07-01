@@ -1,0 +1,30 @@
+@startuml ankh-uml
+title Call Stack
+
+class IdManager
+{
+  -id
+  +generateId()
+}
+
+class WebsiteVerifier
+{
+  +verify()
+}
+
+class User
+{
+  -id
+  -email
+  -username
+  -website
+  -websiteVerifier
+  +getUser()
+  -verifyEmail()
+}
+
+
+User --> IdManager
+User --> WebsiteVerifier
+
+@enduml
