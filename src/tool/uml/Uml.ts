@@ -87,7 +87,7 @@ export class AnkhUml {
     const fields = this.modules.map((module) => ({
 class: `\nclass ${module.class}\n`,
       methods: module.methods
-        .map((method) => `  ${method.private ? '-' : '+'}${method.name}()\n`)
+        .map((method) => `  ${method.private ? '-' : '+'}${method.returnType} ${method.name}()\n`)
         .join(''),
       properties: module.properties
         .map((property) => `  -${property.name}\n`)

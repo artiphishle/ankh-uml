@@ -6,6 +6,7 @@ import {
   isImportDeclaration,
   isMethodDeclaration,
   isPropertyDeclaration,
+  isTypeReferenceNode,
   isNamespaceImport,
   NodeArray,
   ParameterDeclaration,
@@ -13,6 +14,7 @@ import {
   type MethodDeclaration,
   type Node,
   type PropertyDeclaration,
+  type TypeNode,
 } from 'typescript';
 
 export const Ast = {
@@ -69,7 +71,14 @@ export const Ast = {
       private: node.modifiers?.some(
         (modifier) => modifier.kind === SyntaxKind.PrivateKeyword
       ) || false,
+      returnType: node.type ? Ast.getTypeString(node.type) : "void"
     })),
+    
+  getTypeString: (type: TypeNode) =>
+    isTypeReferenceNode(type)
+    ? type.typeName?.getText()
+    : type.getText()
+  ,
 
   recursiveSearch: ({search = 'NewExpression', node }: any) => {
     // const parent = SyntaxKind[node.kind];

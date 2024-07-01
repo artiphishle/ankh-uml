@@ -15,7 +15,7 @@ export class Address {
     this.address = { address, zip, city };
   }
   
-  public getAddress(){
+  public getAddress() : IAddress {
     return this.address;
   }
 }

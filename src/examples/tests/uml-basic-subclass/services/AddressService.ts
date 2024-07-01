@@ -3,7 +3,7 @@ export abstract class AddressService {
     ["8000","Zurich"]
   ]);
   
-  public static getCityByZip(zip: string){
+  public static getCityByZip(zip: string) : string{
     const city = this.zipCityMap.get(zip);
     
     return city || "{unknown}";

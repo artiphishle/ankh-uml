@@ -1,3 +1,5 @@
+import type { TypeNode  } from "typescript";
+
 /**
  * @enum
  * @summary Available exporters for the Ankhorage tools.
@@ -25,6 +27,7 @@ interface AllOptions {
 export interface IMethod {
   readonly name: string;
   readonly private: boolean;
+  readonly returnType: TypeNode | string;
 }
 export interface IProperty {
   readonly name: string;

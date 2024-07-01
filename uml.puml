@@ -4,24 +4,24 @@ title Call Stack
 class IdManager
 {
   -id
-  +generateId()
+  +UniqueIdentifier generateId()
 }
 
 class WebsiteVerifier
 {
-  +verify()
+  +boolean verify()
 }
 
 class AddressService
 {
   -zipCityMap
-  +getCityByZip()
+  +string getCityByZip()
 }
 
 class Address
 {
   -address
-  +getAddress()
+  +IAddress getAddress()
 }
 
 class User
@@ -32,8 +32,8 @@ class User
   -address
   -website
   -websiteVerifier
-  +getUser()
-  -verifyEmail()
+  +string getUser()
+  -boolean verifyEmail()
 }
 
 

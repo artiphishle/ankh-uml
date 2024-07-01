@@ -5,6 +5,8 @@ Ankhorage is the entrypoint of multiple tools that help plan, implement, test & 
 ## Quickstart
 
 ```bash
+# @param root class file (.ts)
+# @param output directory
 npx ankh-uml path/to/RootClass.ts .
 ```
 
@@ -17,11 +19,10 @@ Generate UML diagrams for your TypeScript classes.
 This allows inspection of parts of your whole architecture. Furthermore you can enable/disable features like:
 
 - [x] Start from a root file (entrypoint)
-- [ ] Show/hide interfaces
-- [ ] Show/hide types
-- [ ] Show/hide return values
-- [ ] Show/hide parameters
-- [ ] Show/hide dependencies
+- [ ] Show/hide interfaces/types
+- [x] Show method returnType
+- [ ] Show/hide method params
+- [x] Show/hide dependencies
 - [ ] Set the depth of the diagram
 - [ ] Choose between multiple renderers
   - [ ] Mermaid

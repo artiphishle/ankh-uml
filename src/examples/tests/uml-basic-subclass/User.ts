@@ -35,7 +35,7 @@ export class User {
     this.website = website;
   }
 
-  public getUser() {
+  public getUser(): string {
     return `
       id: ${this.id}\n
       username: ${this.username}\n
