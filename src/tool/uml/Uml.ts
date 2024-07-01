@@ -108,7 +108,7 @@ class: `\nclass ${module.class}\n`,
 
     writeSync(
       `${outDir}/uml.puml`,
-      `@startuml ankh-uml\ntitle Call Stack\n${puml}\n\n${relations}\n@enduml`
+      `@startuml ankh-uml\ntitle UML\n${puml}\n\n${relations}\n@enduml`
     );
 
     return this;
