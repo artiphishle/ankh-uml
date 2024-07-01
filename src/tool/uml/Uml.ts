@@ -1,3 +1,4 @@
+import path from "path";
 import {readSync, writeSync} from 'src/util/fs.util';
 import {EErrRenderer} from 'src/types/error.constants';
 import {ERenderer, IModule, ParseOptions, RenderOptions} from 'src/types/types';
@@ -8,8 +9,10 @@ import {
   forEachChild,
   isClassDeclaration,
   isConstructorDeclaration,
+  isImportDeclaration,
   isMethodDeclaration,
   isPropertyDeclaration,
+  isNamespaceImport,
   NodeArray,
   ParameterDeclaration,
   ScriptTarget,
@@ -34,28 +37,51 @@ const Ast = {
   getConstructorParams: (params: NodeArray<ParameterDeclaration>) =>
     params.map((param) => param.name?.getText()),
 
+  getImports: (sourceFile: any) => {
+    const importModules: {name: string; path: string}[]= [];
+    
+    forEachChild(sourceFile, (node: Node)=> {
+      if(!isImportDeclaration(node)) return importModules;
+      const importClause = node.importClause;
+      const moduleSpecifier = node.moduleSpecifier.getText(sourceFile);
+      const namedBindings = importClause?.namedBindings;
+          if(!namedBindings || isNamespaceImport(namedBindings)) return;
+
+          namedBindings.elements.forEach((element) => {
+    const namedImport = element.name.getText(sourceFile);
+
+    importModules.push({name: namedImport, path: moduleSpecifier});
+    });
+    
+    });
+    
+    if(importModules.length) console.log("\n[Ast::getImports]",importModules.map(({name})=> name).join(", "));
+    
+    return importModules;
+  },
+  
   getProperties: (nodeArray: NodeArray<ClassElement>) =>
     nodeArray.filter(
       (node) => isPropertyDeclaration(node) && (node as PropertyDeclaration)
     ),
 
-  getPropertiesJson: (properties) =>
-    properties.map((property) => ({name: property.name?.getText()})),
+  getPropertiesJson: (properties: any) =>
+    properties.map((property: any) => ({name: property.name?.getText()})),
 
   getMethodJson: (methods: MethodDeclaration[]) =>
     methods.map((node) => ({
       name: node.name?.getText(),
       private: node.modifiers?.some(
         (modifier) => modifier.kind === SyntaxKind.PrivateKeyword
-      ),
+      ) || false,
     })),
 
-  recursiveSearch: ({search = 'NewExpression', node}) => {
-    const parent = SyntaxKind[node.kind];
+  recursiveSearch: ({search = 'NewExpression', node }: any) => {
+    // const parent = SyntaxKind[node.kind];
 
     forEachChild(node, (child) => {
-      const kind = SyntaxKind[child.kind];
-      if (kind !== search) return Ast.recursiveSearch({search, node: child});
+    const kind = SyntaxKind[child.kind];
+    if (kind !== search) return Ast.recursiveSearch({search, node: child});
       return forEachChild(child, (c) => c?.getText());
     });
     return undefined;
@@ -68,9 +94,9 @@ const Ast = {
         console.log('2 ....', SyntaxKind[child.kind]);
         if (SyntaxKind[child.kind] !== 'BinaryExpression') return result;
         forEachChild(child, (token) => {
-          forEachChild(token, (t) => {
+          forEachChild(token, (_) => {
             if (SyntaxKind[token.kind] !== 'NewExpression') return result;
-            token.forEachChild((child) => result.push(child.getText()));
+            // token.forEachChild((child) => result.push(child.getText()));
           });
         });
       });
@@ -81,9 +107,16 @@ const Ast = {
 
 export class AnkhUml {
   private modules: IModule[] = [];
+  private rootPath: string = "";
 
   parse({rootFile}: ParseOptions) {
-    console.log('[UML::parse]', 'rootFile:', rootFile);
+    console.log('\n/////\n\n[UML::parse]', 'rootFile:', path.basename(rootFile));
+    
+    if(!this.rootPath){
+      this.rootPath = path.dirname(rootFile);
+      console.log("[UML::parse]","rootPath:", this.rootPath);
+    }
+    
     if (!rootFile?.endsWith('.ts')) {
       // Quick preview of relations
       this.modules.push({
@@ -96,33 +129,31 @@ export class AnkhUml {
     const content = readSync(rootFile);
     const ast = createSourceFile(rootFile, content, ScriptTarget.ES2020, true);
 
-    forEachChild(ast, (node: Node) => {
-      if (!isClassDeclaration(node)) return;
+    const imp = Ast.getImports(ast);
+    imp.forEach(({name})=> this.parse({rootFile: path.resolve(this.rootPath, `${name}.ts`)}))
+      
+    forEachChild(ast, (n: Node) => {
+      if (!isClassDeclaration(n)) return;
 
-      const methods = Ast.getMethods(node.members);
-      const properties = Ast.getProperties(node.members);
-      // const constructor = Ast.getConstructor(node.members);
-      // const params = Ast.getConstructorParams(constructor?.parameters);
-      // const instantiated = Ast.getInstantiatedClasses(constructor?.body);
-      /*const instantiated = Ast.getInstantiatedClasses(
-        Ast.getMethod(node.members).body
-      );*/
-
-      const instantiated =
-        methods.map((method) => Ast.recursiveSearch({node: method})) || [];
-
+      const methods = Ast.getMethods(n.members);
+      const props = Ast.getProperties(n.members);
+      /*
+      const c = Ast.getConstructor(node.members);
+      const params = Ast.getConstructorParams(c?.parameters);
+      const instantiated = Ast.getInstantiatedClasses(c?.body);
+      const instantiated = Ast.getInstantiatedClasses(Ast.getMethod(node.members).body);
+      */
+      const clss = n.name?.getText();
+      if(!clss) return;
+      
       const module: IModule = {
-        instantiated,
-        class: node.name.getText(),
+        instantiated: imp.map(({name})=> name),
+        class: clss,
         methods: Ast.getMethodJson(methods),
-        properties: Ast.getPropertiesJson(properties),
+        properties: Ast.getPropertiesJson(props),
       };
-
-      if (module.class) this.modules.push(module);
-
-      instantiated.forEach((subClass) => {
-        this.parse({rootFile: subClass});
-      });
+      
+      this.modules.push(module);
     });
 
     return this;
@@ -145,7 +176,7 @@ export class AnkhUml {
 
   private renderPlantUml(outDir: string) {
     const fields = this.modules.map((module) => ({
-      class: `class ${module.class}\n`,
+class: `\nclass ${module.class}\n`,
       methods: module.methods
         .map((method) => `  ${method.private ? '-' : '+'}${method.name}()\n`)
         .join(''),
@@ -174,9 +205,9 @@ export class AnkhUml {
     return this;
   }
 }
+
 const [rootFile] = process.argv.slice(2);
-console.log('[UML]', 'rootFile:', rootFile);
 
 new AnkhUml()
-  .parse({rootFile: rootFile})
+.parse({rootFile})
   .render({renderer: ERenderer.PlantUml, outDir: '.'});

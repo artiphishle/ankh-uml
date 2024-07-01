@@ -8,7 +8,7 @@ interface IUser {
   website: string;
 }
 
-class User {
+export class User {
   private id: string;
   private email: string;
   private username: string;

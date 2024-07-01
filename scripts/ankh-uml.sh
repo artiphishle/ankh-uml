@@ -1,4 +1,4 @@
 #!/bin/bash
 
-pnpm start $1 $2
+pnpm start $3 $4
 exit 0

@@ -16,12 +16,12 @@ const getCurrentBranch = () =>
 const getLogs = (n = 100) =>
   execute(pipe(GIT_LOG_ONELINE, `head -n ${n}`))
     .split('\n')
-    .map((log) => log.split(' '));
+    .map((log: string) => log.split(' '));
 
 // 1. Get current branch and logs
 const checkout = `checkout ${getCurrentBranch()}`;
 const commits = getLogs()
-  .map((log) => `commit id: "${log[0]}"`)
+  .map((log: string) => `commit id: "${log[0]}"`)
   .join('\n');
 
 // 2. Generate mermaid graph
