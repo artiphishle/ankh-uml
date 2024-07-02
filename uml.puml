@@ -1,5 +1,5 @@
 @startuml ankh-uml
-title Call Stack
+title UML
 
 class IdManager
 {

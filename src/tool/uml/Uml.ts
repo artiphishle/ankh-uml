@@ -1,3 +1,5 @@
+import {Sequence} from "./Sequence";
+
 import {resolve, dirname, basename} from "path";
 import {Ast} from 'src/util/ast.util';
 import {readSync, writeSync} from 'src/util/fs.util';
@@ -41,7 +43,7 @@ export class AnkhUml {
     imp.forEach(({path})=> this.parse({rootFile: resolve(this.rootPath, `${path}.ts`)}))
 
       
-    forEachChild(ast, (n: Node) => {
+  forEachChild(ast, (n: Node) => {
       if (!isClassDeclaration(n)) return;
 
       const methods = Ast.getMethods(n.members);
@@ -115,8 +117,10 @@ class: `\nclass ${module.class}\n`,
   }
 }
 
-const [rootFile] = process.argv.slice(2);
+const [rootFile, outDir, seq] = process.argv.slice(2)
 
-new AnkhUml()
+if(seq) new Sequence().parse(rootFile);
+
+else new AnkhUml()
 .parse({rootFile})
-  .render({renderer: ERenderer.PlantUml, outDir: '.'});
+  .render({renderer: ERenderer.PlantUml, outDir});

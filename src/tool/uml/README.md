@@ -1,9 +1,17 @@
 # ankh-uml
 
-Generation of UML diagrams, dependencies and relations are soon ready.
+Generation of plantUML (& soon Mermaid) diagrams:
+  
+- Class Diagram
+- Sequence Diagram (WIP)
 
 ## Quickstart
 
+
 ```bash
-npx ankh-uml -o ./outDir ./path/to/MyClass.ts
+# Class Diagram
+npx ankh-uml src/examples/tests/uml-base-subclass/User.ts .
+
+# Sequence Diagram
+npx ankh-uml src/examples/tests/uml-base-subclass/User.ts . --sequence
 ```
