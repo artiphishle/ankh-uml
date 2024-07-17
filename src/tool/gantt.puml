@@ -1,0 +1,16 @@
+@startgantt
+[Kickoff] requires 1 day
+[Kickoff] is colored in black
+
+[ApiGateway] starts at [Kickoff]'s end
+then [ApiGateway] requires 2 day
+[ApiGateway] is colored in lightGreen
+
+[CognitoAuth] starts at [ApiGateway]'s end
+then [CognitoAuth] requires 2 day
+[CognitoAuth] is colored in lightGreen
+
+[ApplyConfig] starts at [CognitoAuth]'s end
+[ApplyConfig] requires 4 days
+[ApplyConfig] is colored in brown
+@endgantt

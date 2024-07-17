@@ -27,17 +27,17 @@
     "lodash": "^4.17.21",
     "plantuml-parser": "^0.4.0",
     "ts-node": "^10.9.2",
-    "tslib": "^2.6.2",
-    "typescript": "^5.4.4",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.3",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.0",
-    "@types/node": "^20.12.5",
+    "@types/lodash": "^4.17.7",
+    "@types/node": "^20.14.11",
     "@types/yargs": "^17.0.32",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.3",
     "ts-loader": "^9.5.1",
-    "webpack": "^5.91.0",
+    "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4",
     "webpack-node-externals": "^3.0.0"
   },
